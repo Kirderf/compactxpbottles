@@ -1,0 +1,16 @@
+[
+{
+  "modid": "compactxpbottles",
+  "name": "Compact Experience Bottles",
+  "description": "Compact Experience Bottles is created by a request at minecraftforum.net. Want to support Kirderf, head over to curseforge and show your support.",
+  "version": "1.0.1",
+  "mcversion": "1.12.2",
+  "url": "https://www.curseforge.com/minecraft/mc-mods/compactxpbottles",
+  "updateUrl": "",
+  "authorList": ["Kirderf"],
+  "credits": "Thanks to presmuffin123",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
