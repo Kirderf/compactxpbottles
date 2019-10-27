@@ -9,7 +9,6 @@ import com.kirderf.compactxpbottles.util.IHasModel;
 import com.kirderf.compactxpbottles.util.Reference;
 
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
