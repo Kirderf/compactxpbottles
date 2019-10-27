@@ -1,0 +1,14 @@
+{
+	"type":"minecraft:crafting_shaped",
+	
+	"pattern":[
+		"xx",
+		"xx"
+	],
+	"key":{
+		"x":{ "item":"compactxpbottles:x16experiencebottle"}
+	},
+	"result":{
+		"item":"compactxpbottles:x64experiencebottle"
+	}
+}

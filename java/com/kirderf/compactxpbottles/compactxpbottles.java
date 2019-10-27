@@ -1,17 +1,11 @@
-package com.kirderf.horsesExtended;
+package com.kirderf.compactxpbottles;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.kirderf.horsesExtended.lists.FoodList;
-import com.kirderf.horsesExtended.lists.ItemList;
-import com.kirderf.horsesExtended.util.Reference;
+import com.kirderf.compactxpbottles.lists.ItemList;
 
-import net.minecraft.item.Food;
-import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -21,12 +15,12 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod(Reference.MODID)
-public class HorsesExtended {
-	public static HorsesExtended instance;
-	private static final Logger logger = LogManager.getLogger(Reference.MODID);
+@Mod("compactxpbottles")
+public class compactxpbottles {
+	public static compactxpbottles instance;
+	private static final Logger logger = LogManager.getLogger("compactxpbottles");
 
-	public HorsesExtended() {
+	public compactxpbottles() {
 		instance = this;
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientRegisteries);
@@ -49,14 +43,17 @@ public class HorsesExtended {
 		public static void RegistryItems(final RegistryEvent.Register<Item> event) {
 
 			event.getRegistry().registerAll(
-					ItemList.horseboost = new Item(new Item.Properties().food(FoodList.horseboost).group(ItemGroup.MISC))
-					.setRegistryName(location("horseboost")));
+					ItemList.x4experiencebottle.setRegistryName(location("x4experiencebottle")),
+					ItemList.x16experiencebottle.setRegistryName(location("x16experiencebottle")),
+					ItemList.x64experiencebottle.setRegistryName(location("x64experiencebottle")),
+					ItemList.x256experiencebottle.setRegistryName(location("x256experiencebottle")));
 
 			logger.info("Items Registered");
 		}
 
 		public static ResourceLocation location(String name) {
-			return new ResourceLocation(Reference.MODID, name);
+			return new ResourceLocation("compactxpbottles", name);
+
 		}
 	}
 }
