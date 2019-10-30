@@ -1,24 +1,32 @@
 
-modLoader="javafml" #mandatory
+modLoader="javafml"
 loaderVersion="[28,)" #mandatory (28 is current forge version)
-# A URL to refer people to when problems occur with this mod
-#issueTrackerURL="http://my.issue.tracker/" #optional
+issueTrackerURL="https://github.com/Kirderf/compactxpbottles/issues"
 [[mods]] #mandatory
-modId="compactxpbottles" #mandatory
-version="1.0.1" #mandatory
+modId="compactxpbottles"
+version="1.0.2"
+
  # A display name for the mod
 displayName="Compact Experience Bottles" #mandatory
+
 # A URL to query for updates for this mod. See the JSON update specification <here>
 #updateJSONURL="http://myurl.me/" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-displayURL="https://www.curseforge.com/minecraft/mc-mods/compactxpbottles" #optional
+
+displayURL="https://www.curseforge.com/minecraft/mc-mods/compactxpbottles"
+
 # A file name (in the root of the mod JAR) containing a logo for display
 #logoFile="examplemod.png" #optional
 # A text field displayed in the mod UI
-credits="Thanks to presmuffin123" #optional
+
+credits="Thanks to presmuffin123"
+
 # A text field displayed in the mod UI
-authors="Kirderf" #optional
+
+authors="Kirderf"
+
 # The description text for the mod (multi line!) (#mandatory)
+
 description='''
 Compact Experience Bottles is created by request at minecraftforum.net. Want to support Kirderf, head over to curseforge and show your support.
 '''

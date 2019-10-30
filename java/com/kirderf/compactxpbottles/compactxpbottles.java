@@ -24,7 +24,6 @@ public class compactxpbottles {
 		instance = this;
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientRegisteries);
-
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -33,22 +32,19 @@ public class compactxpbottles {
 	}
 
 	private void clientRegisteries(final FMLClientSetupEvent event) {
-		logger.info("clientRegisteries method registered");
-
+		logger.info(" clientRegisteries method registered");
 	}
 
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 	public static class RegistryEvents {
 		@SubscribeEvent
 		public static void RegistryItems(final RegistryEvent.Register<Item> event) {
-
 			event.getRegistry().registerAll(
 					ItemList.x4experiencebottle.setRegistryName(location("x4experiencebottle")),
 					ItemList.x16experiencebottle.setRegistryName(location("x16experiencebottle")),
 					ItemList.x64experiencebottle.setRegistryName(location("x64experiencebottle")),
 					ItemList.x256experiencebottle.setRegistryName(location("x256experiencebottle")));
-
-			logger.info("Items Registered");
+			logger.info("Items registered");
 		}
 
 		public static ResourceLocation location(String name) {

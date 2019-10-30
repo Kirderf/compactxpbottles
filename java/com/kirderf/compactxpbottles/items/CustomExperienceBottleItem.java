@@ -16,14 +16,16 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class CustomExperienceBottleItem extends Item {
+	private int xpMultiplyer = 1;
 	
-	public CustomExperienceBottleItem(Item.Properties builder, int xpMultiplyer) {
+	public CustomExperienceBottleItem(Item.Properties builder) {
 		super(builder);
-		this.xpMultiplyer = xpMultiplyer;
 	}
 	
-	public int xpMultiplyer;
-	
+	public CustomExperienceBottleItem setXpMultiplyer(int xpMultiplyer) {
+		this.xpMultiplyer = xpMultiplyer;
+		return this;
+	}
 
 	public int getXpMultiplyer() {
 		return this.xpMultiplyer;
@@ -59,7 +61,7 @@ public class CustomExperienceBottleItem extends Item {
 				0.4F / (random.nextFloat() * 0.4F + 0.8F));
 		if (!worldIn.isRemote) {
 			
-			CustomExperienceBottleEntity experiencebottleentity = new CustomExperienceBottleEntity(worldIn, playerIn, xpMultiplyer );
+			CustomExperienceBottleEntity experiencebottleentity = new CustomExperienceBottleEntity(worldIn, playerIn, this.xpMultiplyer );
 			experiencebottleentity.func_213884_b(itemstack);
 			experiencebottleentity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, -20.0F, 0.7F, 1.0F);
 			worldIn.addEntity(experiencebottleentity);

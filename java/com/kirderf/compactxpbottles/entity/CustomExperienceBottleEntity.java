@@ -10,7 +10,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class CustomExperienceBottleEntity extends ExperienceBottleEntity {
-	int xpMultiPlyer;
+	private int xpMultiPlyer;
 
 	public CustomExperienceBottleEntity(World worldIn, PlayerEntity playerIn, int xpMultiplyer) {
 		super(worldIn, playerIn);
