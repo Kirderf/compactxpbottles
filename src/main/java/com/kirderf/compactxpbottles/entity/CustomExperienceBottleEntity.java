@@ -16,12 +16,20 @@ public class CustomExperienceBottleEntity extends ExperienceBottleEntity {
 		super(worldIn, playerIn);
 		this.xpMultiPlyer = xpMultiplyer;
 	}
-	 
+
+	public CustomExperienceBottleEntity(World worldIn, double x, double y, double z) {
+		super(worldIn, x, y, z);
+	}
+
+	protected float getGravityVelocity() {
+		return 0.03F; // Sets the gravity of the entity
+	}
+
 	@Override
 	protected void onImpact(RayTraceResult result) {
 		if (!this.world.isRemote) {
 			this.world.playEvent(2002, new BlockPos(this), PotionUtils.getPotionColor(Potions.WATER));
-			int i = (3 + this.world.rand.nextInt(5) + this.world.rand.nextInt(5))*xpMultiPlyer;
+			int i = (3 + this.world.rand.nextInt(5) + this.world.rand.nextInt(5)) * xpMultiPlyer;
 
 			while (i > 0) {
 				int j = ExperienceOrbEntity.getXPSplit(i);
@@ -31,7 +39,5 @@ public class CustomExperienceBottleEntity extends ExperienceBottleEntity {
 
 			this.remove();
 		}
-
 	}
 }
-

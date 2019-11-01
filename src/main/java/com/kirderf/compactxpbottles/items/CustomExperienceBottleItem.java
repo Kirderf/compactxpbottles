@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class CustomExperienceBottleItem extends Item {
+public class CustomExperienceBottleItem extends Item{
 	private int xpMultiplyer = 1;
 	
 	public CustomExperienceBottleItem(Item.Properties builder) {
@@ -70,5 +70,6 @@ public class CustomExperienceBottleItem extends Item {
 		playerIn.addStat(Stats.ITEM_USED.get(this));
 		return new ActionResult<>(ActionResultType.SUCCESS, itemstack);
 	}
+
 }
 

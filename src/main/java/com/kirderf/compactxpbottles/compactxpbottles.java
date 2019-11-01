@@ -3,9 +3,12 @@ package com.kirderf.compactxpbottles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.kirderf.compactxpbottles.entity.CustomExperienceBottleEntity;
 import com.kirderf.compactxpbottles.lists.ItemList;
 
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -19,7 +22,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class compactxpbottles {
 	public static compactxpbottles instance;
 	private static final Logger logger = LogManager.getLogger("compactxpbottles");
-
+	private static ItemGroup creativeTab = new KirderfCreativeTab(0,"Compactxpbottles");
 	public compactxpbottles() {
 		instance = this;
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -45,6 +48,13 @@ public class compactxpbottles {
 					ItemList.x64experiencebottle.setRegistryName(location("x64experiencebottle")),
 					ItemList.x256experiencebottle.setRegistryName(location("x256experiencebottle")));
 			logger.info("Items registered");
+		}
+		@SubscribeEvent
+		public static void RegistryProjecttile(final RegistryEvent.Register<EntityType<?>> event) {
+			event.getRegistry().registerAll(
+					);
+			
+			
 		}
 
 		public static ResourceLocation location(String name) {
