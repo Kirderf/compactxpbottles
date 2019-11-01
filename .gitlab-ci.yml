@@ -5,7 +5,9 @@ variables:
 
 build:
   stage: build
-  script: ./gradlew build
+  script: 
+  - chmod -x gradlew
+  - ./gradlew build
   artifacts:
     paths:
       - build/libs/*.jar
@@ -20,7 +22,9 @@ build:
 
 test:
   stage: test
-  script: ./gradlew check
+  script: 
+  - chmod -x gradlew
+  - ./gradlew check
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull
