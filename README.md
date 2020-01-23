@@ -1,6 +1,4 @@
 # compactxpbottles
 Minecraft mod for compacting experience bottles
 
-!!!!
-MOVED TO https://gitlab.com/Kirderf/compactxpbottles
-!!!!
+Want to try out the mod? Head over to curseforge for download.
