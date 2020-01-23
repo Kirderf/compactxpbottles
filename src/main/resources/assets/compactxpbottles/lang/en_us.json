@@ -2,5 +2,6 @@
 	"item.compactxpbottles.x4experiencebottle": "Experience bottle X4",
 	"item.compactxpbottles.x16experiencebottle": "Experience bottle X16",
 	"item.compactxpbottles.x64experiencebottle": "Experience bottle X64",
-	"item.compactxpbottles.x256experiencebottle": "Experience bottle X256"
+	"item.compactxpbottles.x256experiencebottle": "Experience bottle X256",
+	"itemGroup.compactxpbottles": "Compact xp bottles"
 }

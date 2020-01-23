@@ -1,47 +1,57 @@
 package com.kirderf.compactxpbottles;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.kirderf.compactxpbottles.entity.CustomExperienceBottleEntity;
+import com.kirderf.compactxpbottles.core.Runner;
 import com.kirderf.compactxpbottles.lists.ItemList;
-
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ObjectHolder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+@SuppressWarnings("deprecation")
 @Mod("compactxpbottles")
 public class compactxpbottles {
+	
+	
 	public static compactxpbottles instance;
 	private static final Logger logger = LogManager.getLogger("compactxpbottles");
-	private static ItemGroup creativeTab = new KirderfCreativeTab(0,"Compactxpbottles");
+	public static final String MODID = "compactxpbottles";
+	public static ItemGroup KirderfCreativeTab = new KirderfCreativeTab("compactxpbottles");
+	
+	
 	public compactxpbottles() {
+		
 		instance = this;
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientRegisteries);
 		MinecraftForge.EVENT_BUS.register(this);
+		
 	}
-
+	
 	private void setup(final FMLCommonSetupEvent event) {
+		DeferredWorkQueue.runLater(new Runner());
 		logger.info("Setup method registered");
 	}
 
 	private void clientRegisteries(final FMLClientSetupEvent event) {
-		logger.info(" clientRegisteries method registered");
+		logger.info("ClientRegisteries method registered");
 	}
-
+	
+	
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+	@ObjectHolder(compactxpbottles.MODID)
 	public static class RegistryEvents {
 		@SubscribeEvent
-		public static void RegistryItems(final RegistryEvent.Register<Item> event) {
+		public static void RegistryItems(final RegistryEvent.Register<Item> event) {			
 			event.getRegistry().registerAll(
 					ItemList.x4experiencebottle.setRegistryName(location("x4experiencebottle")),
 					ItemList.x16experiencebottle.setRegistryName(location("x16experiencebottle")),
@@ -49,14 +59,6 @@ public class compactxpbottles {
 					ItemList.x256experiencebottle.setRegistryName(location("x256experiencebottle")));
 			logger.info("Items registered");
 		}
-		@SubscribeEvent
-		public static void RegistryProjecttile(final RegistryEvent.Register<EntityType<?>> event) {
-			event.getRegistry().registerAll(
-					);
-			
-			
-		}
-
 		public static ResourceLocation location(String name) {
 			return new ResourceLocation("compactxpbottles", name);
 

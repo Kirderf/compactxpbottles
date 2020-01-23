@@ -4,7 +4,7 @@ loaderVersion="[28,)" #mandatory (28 is current forge version)
 issueTrackerURL="https://github.com/Kirderf/compactxpbottles/issues"
 [[mods]] #mandatory
 modId="compactxpbottles"
-version="1.0.2"
+version="1.1.2"
 
  # A display name for the mod
 displayName="Compact Experience Bottles" #mandatory

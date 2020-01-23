@@ -1,7 +1,6 @@
 package com.kirderf.compactxpbottles;
 
 import com.kirderf.compactxpbottles.lists.ItemList;
-
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
