@@ -10,15 +10,17 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class CustumDispenseBehavior extends ProjectileDispenseBehavior{
+import javax.annotation.ParametersAreNonnullByDefault;
+
+public class CustomDispenseBehavior extends ProjectileDispenseBehavior{
 
 	public static void init() {
-		DispenserBlock.registerDispenseBehavior(ItemList.x4experiencebottle,  new CustumDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(ItemList.x16experiencebottle, new CustumDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(ItemList.x64experiencebottle, new CustumDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(ItemList.x256experiencebottle, new CustumDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(ItemList.x4experiencebottle,  new CustomDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(ItemList.x16experiencebottle, new CustomDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(ItemList.x64experiencebottle, new CustomDispenseBehavior());
+		DispenserBlock.registerDispenseBehavior(ItemList.x256experiencebottle, new CustomDispenseBehavior());
 	}
-	@Override
+	@ParametersAreNonnullByDefault
 	protected IProjectile getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn) {
 		return new CustomExperienceBottleEntity(worldIn,position.getX(),position.getY(),position.getZ(), (CustomExperienceBottleItem) stackIn.getItem().asItem());
 		
