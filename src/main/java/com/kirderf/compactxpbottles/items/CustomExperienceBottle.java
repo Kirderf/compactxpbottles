@@ -7,13 +7,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class CustomExperienceBottleItem extends Item {
+public class CustomExperienceBottle extends Item {
     private int xpMultiplier;
 
-    public CustomExperienceBottleItem(ExtraProperties properties) {
+    public CustomExperienceBottle(ExtraProperties properties) {
         super(properties);
         this.xpMultiplier = properties.xpMultiplier;
     }
@@ -22,11 +20,7 @@ public class CustomExperienceBottleItem extends Item {
         return this.xpMultiplier;
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public boolean hasEffect(ItemStack stack) {
-        return true;
-    }
-
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         if (!playerIn.abilities.isCreativeMode) {
@@ -49,12 +43,6 @@ public class CustomExperienceBottleItem extends Item {
 
     public static class ExtraProperties extends Item.Properties {
         private int xpMultiplier;
-
-
-        public ExtraProperties() {
-            super();
-        }
-
         public ExtraProperties xpMultiplier(int xpMultiplier) {
             this.xpMultiplier = xpMultiplier;
             return this;

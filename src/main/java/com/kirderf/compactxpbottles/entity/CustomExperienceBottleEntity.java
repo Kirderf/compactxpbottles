@@ -1,6 +1,6 @@
 package com.kirderf.compactxpbottles.entity;
 
-import com.kirderf.compactxpbottles.items.CustomExperienceBottleItem;
+import com.kirderf.compactxpbottles.items.CustomExperienceBottle;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ExperienceBottleEntity;
 import net.minecraft.entity.item.ExperienceOrbEntity;
@@ -18,13 +18,9 @@ public class CustomExperienceBottleEntity extends ExperienceBottleEntity {
         this.xpMultiplier = xpMultiplier;
     }
 
-    public CustomExperienceBottleEntity(World worldIn, double x, double y, double z, CustomExperienceBottleItem item) {
+    public CustomExperienceBottleEntity(World worldIn, double x, double y, double z, CustomExperienceBottle item) {
         super(worldIn, x, y, z);
         this.xpMultiplier = item.getXpMultiplier();
-    }
-
-    protected float getGravityVelocity() {
-        return 0.07F; // Sets the gravity of the entity
     }
 
     @Override
