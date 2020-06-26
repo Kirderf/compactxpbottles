@@ -15,15 +15,16 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ObjectHolder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import java.util.logging.Logger;
+
 
 @SuppressWarnings("deprecation")
 @Mod("compactxpbottles")
 public class compactxpbottles {
 
     public static compactxpbottles instance;
-    private static final Logger logger = LogManager.getLogger("compactxpbottles");
+    private static final Logger logger = Logger.getLogger("compactxpbottles");
     public static final String MODID = "compactxpbottles";
     public static ItemGroup KirderfCreativeTab = new KirderfCreativeTab("compactxpbottles");
 
@@ -60,9 +61,7 @@ public class compactxpbottles {
                     ItemList.x512experiencebottle.setRegistryName(location("x512experiencebottle")),
                     ItemList.x1kexperiencebottle.setRegistryName(location("x1kexperiencebottle")),
                     ItemList.x2kexperiencebottle.setRegistryName(location("x2kexperiencebottle")),
-                    ItemList.x4kexperiencebottle.setRegistryName(location("x4kexperiencebottle")),
-                    ItemList.x8kexperiencebottle.setRegistryName(location("x8kexperiencebottle")),
-                    ItemList.x16kexperiencebottle.setRegistryName(location("x16kexperiencebottle"))
+                    ItemList.x4kexperiencebottle.setRegistryName(location("x4kexperiencebottle"))
 
             );
             logger.info("Items registered");

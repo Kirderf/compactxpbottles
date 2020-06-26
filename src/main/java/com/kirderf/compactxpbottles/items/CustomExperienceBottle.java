@@ -2,13 +2,14 @@ package com.kirderf.compactxpbottles.items;
 
 import com.kirderf.compactxpbottles.entity.CustomExperienceBottleEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ExperienceBottleItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
-public class CustomExperienceBottle extends Item {
+public class CustomExperienceBottle extends ExperienceBottleItem {
     private int xpMultiplier;
 
     public CustomExperienceBottle(ExtraProperties properties) {
@@ -32,8 +33,7 @@ public class CustomExperienceBottle extends Item {
                 0.4F / (random.nextFloat() * 0.4F + 0.8F));
         if (!worldIn.isRemote) {
             CustomExperienceBottleEntity experiencebottleentity = new CustomExperienceBottleEntity(worldIn, playerIn, xpMultiplier);
-            experiencebottleentity.func_213884_b(itemstack);
-            experiencebottleentity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, -20.0F, 0.7F, 1.0F);
+            experiencebottleentity.func_234612_a_(playerIn,playerIn.rotationPitch, playerIn.rotationYaw, -20.0F, 0.7F, 1.0F);
             worldIn.addEntity(experiencebottleentity);
         }
 

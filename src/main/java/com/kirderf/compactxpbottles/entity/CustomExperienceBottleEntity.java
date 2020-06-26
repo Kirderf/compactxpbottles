@@ -1,6 +1,7 @@
 package com.kirderf.compactxpbottles.entity;
 
 import com.kirderf.compactxpbottles.items.CustomExperienceBottle;
+import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ExperienceBottleEntity;
 import net.minecraft.entity.item.ExperienceOrbEntity;
@@ -26,7 +27,7 @@ public class CustomExperienceBottleEntity extends ExperienceBottleEntity {
     @Override
     protected void onImpact(RayTraceResult result) {
         if (!this.world.isRemote) {
-            this.world.playEvent(2002, new BlockPos(this), PotionUtils.getPotionColor(Potions.WATER));
+            this.world.playEvent(2002, this.func_233580_cy_(), PotionUtils.getPotionColor(Potions.WATER));
 
             int i = (3 + this.world.rand.nextInt(5) + this.world.rand.nextInt(5)) * this.xpMultiplier;
 
