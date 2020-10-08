@@ -14,13 +14,13 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 ext{
-	mc_version= '1.16.1'
+	mc_version= '1.16.3'
 
-	mc_forge_version= mc_version +'-32.0.6'
+	mc_forge_version= mc_version +'-34.1.0'
 
-	compactxpbottles_version= "1.3.0"
+	compactxpbottles_version= "1.3.2"
 }
-version = mc_version +"-"+compactxpbottles_version
+version = mc_version +"-"+ compactxpbottles_version
 group = 'kirderf.compactxpbottles' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'compactxpbottles'
 
