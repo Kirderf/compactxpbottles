@@ -1,15 +1,15 @@
 package com.kirderf.compactxpbottles;
 
-import com.kirderf.compactxpbottles.core.Runner;
 import com.kirderf.compactxpbottles.creativetab.KirderfCreativeTab;
+import com.kirderf.compactxpbottles.dispenser.CustomDispenseBehavior;
 import com.kirderf.compactxpbottles.lists.ItemList;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -19,14 +19,13 @@ import net.minecraftforge.registries.ObjectHolder;
 import java.util.logging.Logger;
 
 
-@SuppressWarnings("deprecation")
 @Mod("compactxpbottles")
 public class compactxpbottles {
 
     public static compactxpbottles instance;
     private static final Logger logger = Logger.getLogger("compactxpbottles");
     public static final String MODID = "compactxpbottles";
-    public static ItemGroup KirderfCreativeTab = new KirderfCreativeTab("compactxpbottles");
+    public static CreativeModeTab KirderfCreativeTab = new KirderfCreativeTab("compactxpbottles");
 
 
     public compactxpbottles() {
@@ -39,7 +38,13 @@ public class compactxpbottles {
     }
 
     private void setupEvent(final FMLCommonSetupEvent event) {
-        DeferredWorkQueue.runLater(new Runner());
+        DispenserBlock.registerBehavior(ItemList.x4experiencebottle, new CustomDispenseBehavior());
+        DispenserBlock.registerBehavior(ItemList.x16experiencebottle, new CustomDispenseBehavior());
+        DispenserBlock.registerBehavior(ItemList.x64experiencebottle, new CustomDispenseBehavior());
+        DispenserBlock.registerBehavior(ItemList.x256experiencebottle, new CustomDispenseBehavior());
+        DispenserBlock.registerBehavior(ItemList.x512experiencebottle, new CustomDispenseBehavior());
+        DispenserBlock.registerBehavior(ItemList.x2kexperiencebottle, new CustomDispenseBehavior());
+        DispenserBlock.registerBehavior(ItemList.x4kexperiencebottle, new CustomDispenseBehavior());
         logger.info("Setup method registered");
     }
 
@@ -66,7 +71,6 @@ public class compactxpbottles {
             );
             logger.info("Items registered");
         }
-
         public static ResourceLocation location(String name) {
             return new ResourceLocation("compactxpbottles", name);
 
