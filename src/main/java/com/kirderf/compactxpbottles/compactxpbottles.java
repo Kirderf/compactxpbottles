@@ -5,16 +5,15 @@ import com.kirderf.compactxpbottles.dispenser.CustomDispenseBehavior;
 import com.kirderf.compactxpbottles.lists.ItemList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 
 import java.util.logging.Logger;
 
@@ -54,26 +53,22 @@ public class compactxpbottles {
 
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-    @ObjectHolder(compactxpbottles.MODID)
     public static class RegistryEvents {
         @SubscribeEvent
-        public static void RegistryItems(final RegistryEvent.Register<Item> event) {
-            event.getRegistry().registerAll(
-                    ItemList.x4experiencebottle.setRegistryName(location("x4experiencebottle")),
-                    ItemList.x16experiencebottle.setRegistryName(location("x16experiencebottle")),
-                    ItemList.x64experiencebottle.setRegistryName(location("x64experiencebottle")),
-                    ItemList.x256experiencebottle.setRegistryName(location("x256experiencebottle")),
-                    ItemList.x512experiencebottle.setRegistryName(location("x512experiencebottle")),
-                    ItemList.x1kexperiencebottle.setRegistryName(location("x1kexperiencebottle")),
-                    ItemList.x2kexperiencebottle.setRegistryName(location("x2kexperiencebottle")),
-                    ItemList.x4kexperiencebottle.setRegistryName(location("x4kexperiencebottle"))
+        public static void RegistryItems(final RegisterEvent event) {
+            event.register(ForgeRegistries.Keys.ITEMS, itemRegisterHelper -> {
+                itemRegisterHelper.register(new ResourceLocation(MODID,"x4experiencebottle"),ItemList.x4experiencebottle.asItem());
+                itemRegisterHelper.register(new ResourceLocation(MODID,"x16experiencebottle"),ItemList.x16experiencebottle.asItem());
+                itemRegisterHelper.register(new ResourceLocation(MODID,"x64experiencebottle"),ItemList.x64experiencebottle.asItem());
+                itemRegisterHelper.register(new ResourceLocation(MODID,"x256experiencebottle"),ItemList.x256experiencebottle.asItem());
+                itemRegisterHelper.register(new ResourceLocation(MODID,"x512experiencebottle"),ItemList.x512experiencebottle.asItem());
+                itemRegisterHelper.register(new ResourceLocation(MODID,"x1kexperiencebottle"),ItemList.x1kexperiencebottle.asItem());
+                itemRegisterHelper.register(new ResourceLocation(MODID,"x2kexperiencebottle"),ItemList.x2kexperiencebottle.asItem());
+                itemRegisterHelper.register(new ResourceLocation(MODID,"x4kexperiencebottle"),ItemList.x4kexperiencebottle.asItem());
+                    }
 
             );
             logger.info("Items registered");
-        }
-        public static ResourceLocation location(String name) {
-            return new ResourceLocation("compactxpbottles", name);
-
         }
     }
 }

@@ -9,6 +9,7 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
+import org.jetbrains.annotations.NotNull;
 
 
 public class CustomExperienceBottleEntity extends ThrownExperienceBottle {
@@ -25,7 +26,7 @@ public class CustomExperienceBottleEntity extends ThrownExperienceBottle {
     }
 
  @Override
- protected void onHit(HitResult p_37521_) {
+ protected void onHit(@NotNull HitResult p_37521_) {
      super.onHit(p_37521_);
      if (this.level instanceof ServerLevel) {
          this.level.levelEvent(2002, this.blockPosition(), PotionUtils.getColor(Potions.WATER));
@@ -35,5 +36,6 @@ public class CustomExperienceBottleEntity extends ThrownExperienceBottle {
      }
 
  }
+
 
 }

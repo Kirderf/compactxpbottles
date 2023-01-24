@@ -7,13 +7,13 @@ import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-
+import org.jetbrains.annotations.NotNull;
 
 
 public class CustomDispenseBehavior extends AbstractProjectileDispenseBehavior {
 
     @Override
-    protected Projectile getProjectile(Level p_123360_, Position position, ItemStack stackIn) {
+    protected @NotNull Projectile getProjectile(@NotNull Level p_123360_, Position position, ItemStack stackIn) {
         return new CustomExperienceBottleEntity(p_123360_, position.x(), position.y(), position.z(), (CustomExperienceBottle) stackIn.getItem().asItem());
 
     }

@@ -1,16 +1,17 @@
 package com.kirderf.compactxpbottles.items;
+
+import com.kirderf.compactxpbottles.entity.CustomExperienceBottleEntity;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import com.kirderf.compactxpbottles.entity.CustomExperienceBottleEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ExperienceBottleItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.stats.Stats;
+import org.jetbrains.annotations.NotNull;
 
 
 public class CustomExperienceBottle extends ExperienceBottleItem {
@@ -25,9 +26,9 @@ public class CustomExperienceBottle extends ExperienceBottleItem {
         return this.xpMultiplier;
     }
     @Override
-    public InteractionResultHolder<ItemStack> use(Level p_41196_, Player p_41197_, InteractionHand p_41198_) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level p_41196_, Player p_41197_, @NotNull InteractionHand p_41198_) {
         ItemStack itemstack = p_41197_.getItemInHand(p_41198_);
-        p_41196_.playSound((Player)null, p_41197_.getX(), p_41197_.getY(), p_41197_.getZ(), SoundEvents.EXPERIENCE_BOTTLE_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (p_41196_.getRandom().nextFloat() * 0.4F + 0.8F));
+        p_41196_.playSound(null, p_41197_.getX(), p_41197_.getY(), p_41197_.getZ(), SoundEvents.EXPERIENCE_BOTTLE_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (p_41196_.random.nextFloat() * 0.4F + 0.8F));
         if (!p_41196_.isClientSide) {
             CustomExperienceBottleEntity thrownexperiencebottle = new CustomExperienceBottleEntity(p_41196_, p_41197_, xpMultiplier);
             thrownexperiencebottle.setItem(itemstack);
