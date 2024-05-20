@@ -27,22 +27,22 @@ public class CustomExperienceBottle extends ExperienceBottleItem {
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level p_41196_, Player p_41197_, @NotNull InteractionHand p_41198_) {
-        ItemStack itemstack = p_41197_.getItemInHand(p_41198_);
-        p_41196_.playSound(null, p_41197_.getX(), p_41197_.getY(), p_41197_.getZ(), SoundEvents.EXPERIENCE_BOTTLE_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (p_41196_.random.nextFloat() * 0.4F + 0.8F));
-        if (!p_41196_.isClientSide) {
-            CustomExperienceBottleEntity thrownexperiencebottle = new CustomExperienceBottleEntity(p_41196_, p_41197_, xpMultiplier);
+    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, @NotNull InteractionHand interactionHand) {
+        ItemStack itemstack = player.getItemInHand(interactionHand);
+        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EXPERIENCE_BOTTLE_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (level.random.nextFloat() * 0.4F + 0.8F));
+        if (!level.isClientSide) {
+            CustomExperienceBottleEntity thrownexperiencebottle = new CustomExperienceBottleEntity(level, player, xpMultiplier);
             thrownexperiencebottle.setItem(itemstack);
-            thrownexperiencebottle.shootFromRotation(p_41197_, p_41197_.getXRot(), p_41197_.getYRot(), -20.0F, 0.7F, 1.0F);
-            p_41196_.addFreshEntity(thrownexperiencebottle);
+            thrownexperiencebottle.shootFromRotation(player, player.getXRot(), player.getYRot(), -20.0F, 0.7F, 1.0F);
+            level.addFreshEntity(thrownexperiencebottle);
         }
 
-        p_41197_.awardStat(Stats.ITEM_USED.get(this));
-        if (!p_41197_.getAbilities().instabuild) {
+        player.awardStat(Stats.ITEM_USED.get(this));
+        if (!player.getAbilities().instabuild) {
             itemstack.shrink(1);
         }
 
-        return InteractionResultHolder.sidedSuccess(itemstack, p_41196_.isClientSide());
+        return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
     }
 
     public static class ExtraProperties extends Item.Properties {
