@@ -1,12 +1,12 @@
 
 modLoader="javafml"
-loaderVersion="[33,)"
+loaderVersion="[45,)"
 issueTrackerURL="https://github.com/Kirderf/compactxpbottles/issues"
 license="All Rights Reserved unless otherwise explicitly stated."
 
 [[mods]] #mandatory
 modId="compactxpbottles"
-version="1.5.0"
+version="2.0.0"
 displayName="Compact Experience Bottles" #mandatory
 
 # A URL to query for updates for this mod. See the JSON update specification <here>

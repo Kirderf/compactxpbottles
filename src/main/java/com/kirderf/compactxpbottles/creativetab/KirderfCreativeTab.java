@@ -12,6 +12,6 @@ public class KirderfCreativeTab extends CreativeModeTab {
 
     @Override
     public @NotNull ItemStack makeIcon() {
-        return new ItemStack(ItemList.x256experiencebottle);
+        return new ItemStack(ItemList.EXPERIENCE_BOTTLE_X256.get());
     }
 }

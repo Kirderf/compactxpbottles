@@ -25,6 +25,7 @@ public class CustomExperienceBottle extends ExperienceBottleItem {
     public int getXpMultiplier() {
         return this.xpMultiplier;
     }
+
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level p_41196_, Player p_41197_, @NotNull InteractionHand p_41198_) {
         ItemStack itemstack = p_41197_.getItemInHand(p_41198_);
@@ -43,8 +44,10 @@ public class CustomExperienceBottle extends ExperienceBottleItem {
 
         return InteractionResultHolder.sidedSuccess(itemstack, p_41196_.isClientSide());
     }
+
     public static class ExtraProperties extends Item.Properties {
         private int xpMultiplier;
+
         public ExtraProperties xpMultiplier(int xpMultiplier) {
             this.xpMultiplier = xpMultiplier;
             return this;
