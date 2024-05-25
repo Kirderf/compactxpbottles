@@ -1,11 +1,10 @@
 package com.kirderf.compactxpbottles.entity;
 
-import com.kirderf.compactxpbottles.items.CustomExperienceBottle;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrownExperienceBottle;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
@@ -20,22 +19,22 @@ public class CustomExperienceBottleEntity extends ThrownExperienceBottle {
         this.xpMultiplier = xpMultiplier;
     }
 
-    public CustomExperienceBottleEntity(Level LevelIn, double x, double y, double z, CustomExperienceBottle item) {
-        super(LevelIn, x, y, z);
-        this.xpMultiplier = item.getXpMultiplier();
+    public CustomExperienceBottleEntity(Level p_37513_, double p_37514_, double p_37515_, double p_37516_, int xpMultiplier) {
+        super(p_37513_, p_37514_, p_37515_, p_37516_);
+        this.xpMultiplier = xpMultiplier;
     }
 
- @Override
- protected void onHit(@NotNull HitResult p_37521_) {
-     super.onHit(p_37521_);
-     if (this.level instanceof ServerLevel) {
-         this.level.levelEvent(2002, this.blockPosition(), PotionUtils.getColor(Potions.WATER));
-         int i = (3 + this.level.random.nextInt(5) + this.level.random.nextInt(5)) * this.xpMultiplier;
-         ExperienceOrb.award((ServerLevel)this.level, this.position(), i);
-         this.discard();
-     }
+    @Override
+    protected void onHit(@NotNull HitResult p_37521_) {
+        super.onHit(p_37521_);
+        if (this.level() instanceof ServerLevel) {
+            this.level().levelEvent(2002, this.blockPosition(), PotionContents.getColor(Potions.WATER));
+            int $$1 = 3 + this.level().random.nextInt(5) + this.level().random.nextInt(5);
+            ExperienceOrb.award((ServerLevel) this.level(), this.position(), $$1 * this.xpMultiplier);
+            this.discard();
+        }
 
- }
+    }
 
 
 }
