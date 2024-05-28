@@ -6,6 +6,16 @@ pipeline {
         FORGE_URL = 'https://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json'
     }
     stages {
+        stage('Checkout') {
+                steps {
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: '*/1.20.x']], // Adjust as needed
+                        userRemoteConfigs: [[url: 'https://github.com/Kirderf/compactxpbottles.git']], // Replace with your repo URL
+                        extensions: []
+                    ])
+                }
+            }
         stage('Download JDK') {
             steps {
                 script {
