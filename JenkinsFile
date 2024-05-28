@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+    environment {
+        JDK_VERSION = 'latest'
+        JDK_URL = 'https://api.adoptopenjdk.net/v3/binary/latest/11/ga/windows/x64/jdk/hotspot/normal/adoptopenjdk'
+        FORGE_URL = 'https://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json'
+    }
+    stages {
+        stage('Download JDK') {
+            steps {
+                script {
+                    echo "Downloading JDK..."
+                    sh """
+                    wget ${JDK_URL} -O jdk.tar.gz
+                    tar -xzf jdk.tar.gz
+                    export JAVA_HOME=$(pwd)/$(tar -tzf jdk.tar.gz | head -1)
+                    export PATH=\$JAVA_HOME/bin:\$PATH
+                    """
+                }
+            }
+        }
+        stage('Download Minecraft Forge') {
+            steps {
+                script {
+                    echo "Fetching Minecraft Forge download URL..."
+                    forge_download_url = sh(script: "curl -s ${FORGE_URL} | jq -r '.promos[\"1.16.5-recommended\"].installer'", returnStdout: true).trim()
+                    forge_filename = forge_download_url.split('/')[-1]
+
+                    echo "Downloading Minecraft Forge from: ${forge_download_url}"
+                    sh """
+                    wget ${forge_download_url} -O ${forge_filename}
+                    """
+                }
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
