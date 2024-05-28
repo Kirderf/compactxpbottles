@@ -1,52 +1,35 @@
 pipeline {
     agent any
-    environment {
-        JDK_VERSION = 'latest'
-        JDK_URL = 'https://api.adoptopenjdk.net/v3/binary/latest/11/ga/windows/x64/jdk/hotspot/normal/adoptopenjdk'
-        FORGE_URL = 'https://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json'
-    }
     stages {
         stage('Checkout') {
-                steps {
-                    checkout([
-                        $class: 'GitSCM',
-                        branches: [[name: '*/1.20.x']], // Adjust as needed
-                        userRemoteConfigs: [[url: 'https://github.com/Kirderf/compactxpbottles.git']], // Replace with your repo URL
-                        extensions: []
-                    ])
-                }
-            }
-        stage('Download JDK') {
             steps {
-                script {
-                    echo "Downloading JDK..."
-                    sh """
-                    wget ${JDK_URL} -O jdk.tar.gz
-                    tar -xzf jdk.tar.gz
-                    export JAVA_HOME=$(pwd)/$(tar -tzf jdk.tar.gz | head -1)
-                    export PATH=\$JAVA_HOME/bin:\$PATH
-                    """
-                }
+                // Replace with your Git repository URL and branch
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[url: 'https://github.com/your-repo.git']]
+                ])
             }
         }
-        stage('Download Minecraft Forge') {
+        stage('Hello') {
+            steps {
+                echo 'Hello, Jenkins!'
+            }
+        }
+        stage('Environment Check') {
             steps {
                 script {
-                    echo "Fetching Minecraft Forge download URL..."
-                    forge_download_url = sh(script: "curl -s ${FORGE_URL} | jq -r '.promos[\"1.16.5-recommended\"].installer'", returnStdout: true).trim()
-                    forge_filename = forge_download_url.split('/')[-1]
-
-                    echo "Downloading Minecraft Forge from: ${forge_download_url}"
-                    sh """
-                    wget ${forge_download_url} -O ${forge_filename}
-                    """
+                    echo "Running environment check..."
+                    sh 'echo "Current directory: $(pwd)"'
+                    sh 'echo "Listing files:"'
+                    sh 'ls -l'
                 }
             }
         }
     }
     post {
         always {
-            cleanWs()
+            cleanWs() // Clean the workspace after the build
         }
     }
 }
