@@ -6,8 +6,8 @@ pipeline {
                 // Replace with your Git repository URL and branch
                 checkout([
                     $class: 'GitSCM',
-                    branches: [[name: '*/main']],
-                    userRemoteConfigs: [[url: 'https://github.com/your-repo.git']]
+                    branches: [[name: '*/1.20.x']],
+                    userRemoteConfigs: [[url: 'https://github.com/Kirderf/compactxpbottles.git']]
                 ])
             }
         }
