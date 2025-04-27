@@ -11,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.NotNull;
 
 import static com.kirderf.compactxpbottles.compactxpbottles.MODID;
 
@@ -32,13 +31,11 @@ public class ItemList {
     private static final RegistryObject<CreativeModeTab> COMPACT_XP_BOTTLES_TAB = CREATIVE_MODE_TAB_DEFERRED_REGISTER.register(MODID, () -> CreativeModeTab.builder()
             .title(Component.translatable("item_group." + MODID))
             .icon(() -> new ItemStack(ItemList.EXPERIENCE_BOTTLE_X256.get()))
-            .displayItems((params, output) -> {
-                ITEMS_REGISTER.getEntries().forEach(x -> output.accept(x.get()));
-            })
+            .displayItems((params, output) -> ITEMS_REGISTER.getEntries().forEach(x -> output.accept(x.get())))
             .build());
 
 
-    private static @NotNull CustomExperienceBottle createCustomExperienceBottle(int xpMultiplier) {
+    private static CustomExperienceBottle createCustomExperienceBottle(int xpMultiplier) {
         return new CustomExperienceBottle(new ExtraProperties().xpMultiplier(xpMultiplier));
     }
 
