@@ -1,16 +1,21 @@
+# The overall format is standard TOML format, v0.5.0.
+# The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
+modLoader="javafml" #mandatory
 
-modLoader="javafml"
-loaderVersion="[45,)"
+# The version of the mod loader required - this uses standard Maven version range syntax. check the @Mod annotation for more details.
+loaderVersion="[4,)" #mandatory
+
 issueTrackerURL="https://github.com/Kirderf/compactxpbottles/issues"
 license="All Rights Reserved unless otherwise explicitly stated."
 
 [[mods]] #mandatory
 modId="compactxpbottles"
-version="2.0.0"
+version="2.1.1"
 displayName="Compact Experience Bottles" #mandatory
 
-# A URL to query for updates for this mod. See the JSON update specification <here>
-#updateJSONURL="http://myurl.me/" #optional
+# A URL to query for updates for this mod. See the JSON update specification https://docs.neoforged.net/docs/misc/updatechecker/
+updateJSONURL="https://curseupdate.com/349327/compactxpbottles?ml=neoforge" #optional
+
 # A URL for the "homepage" for this mod, displayed in the mod UI
 displayURL="https://www.curseforge.com/minecraft/mc-mods/compactxpbottles"
 
@@ -24,4 +29,3 @@ authors="Kirderf"
 description='''
 Compact Experience Bottles is created by request at minecraftforum.net. Want to support Kirderf, head over to curseforge and show your support.
 '''
-

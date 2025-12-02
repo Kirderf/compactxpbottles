@@ -2,48 +2,40 @@ package com.kirderf.compactxpbottles.lists;
 
 
 import com.kirderf.compactxpbottles.items.CustomExperienceBottle;
-import com.kirderf.compactxpbottles.items.CustomExperienceBottle.ExtraProperties;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredItem;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
-import static com.kirderf.compactxpbottles.compactxpbottles.MODID;
+import static com.kirderf.compactxpbottles.CompactXpBottles.MODID;
 
 public class ItemList {
 
-    private static final DeferredRegister<Item> ITEMS_REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+    private static final DeferredRegister.Items ITEMS_REGISTER = DeferredRegister.createItems(MODID);
     private static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB_DEFERRED_REGISTER = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    public static final RegistryObject<Item> EXPERIENCE_BOTTLE_X4 = ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X4".toLowerCase(), () -> createCustomExperienceBottle(4));
-    public static final RegistryObject<Item> EXPERIENCE_BOTTLE_X16 = ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X16".toLowerCase(), () -> createCustomExperienceBottle(16));
-    public static final RegistryObject<Item> EXPERIENCE_BOTTLE_X64 = ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X64".toLowerCase(), () -> createCustomExperienceBottle(64));
-    public static final RegistryObject<Item> EXPERIENCE_BOTTLE_X256 = ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X256".toLowerCase(), () -> createCustomExperienceBottle(256));
-    public static final RegistryObject<Item> EXPERIENCE_BOTTLE_X1K = ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X1K".toLowerCase(), () -> createCustomExperienceBottle(1024));
-    public static final RegistryObject<Item> EXPERIENCE_BOTTLE_X4K = ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X4K".toLowerCase(), () -> createCustomExperienceBottle(4096));
-    public static final RegistryObject<Item> EXPERIENCE_BOTTLE_X16K = ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X16K".toLowerCase(), () -> createCustomExperienceBottle(16384));
-    public static final RegistryObject<Item> EXPERIENCE_BOTTLE_X64K = ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X64K".toLowerCase(), () -> createCustomExperienceBottle(65536));
+    private static DeferredItem<CustomExperienceBottle> iconItem;
 
-    private static final RegistryObject<CreativeModeTab> COMPACT_XP_BOTTLES_TAB = CREATIVE_MODE_TAB_DEFERRED_REGISTER.register(MODID, () -> CreativeModeTab.builder()
-            .title(Component.translatable("item_group." + MODID))
-            .icon(() -> new ItemStack(ItemList.EXPERIENCE_BOTTLE_X256.get()))
-            .displayItems((params, output) -> ITEMS_REGISTER.getEntries().forEach(x -> output.accept(x.get())))
-            .build());
-
-
-    private static CustomExperienceBottle createCustomExperienceBottle(int xpMultiplier) {
-        return new CustomExperienceBottle(new ExtraProperties().xpMultiplier(xpMultiplier));
-    }
-
-    public static DeferredRegister<Item> getItemRegister() {
+    public static DeferredRegister.Items getItemRegister() {
+        ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X4".toLowerCase(), () -> new CustomExperienceBottle(4));
+        ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X16".toLowerCase(), () -> new CustomExperienceBottle(16));
+        ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X64".toLowerCase(), () -> new CustomExperienceBottle(64));
+        ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X256".toLowerCase(), () -> new CustomExperienceBottle(256));
+        ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X1K".toLowerCase(), () -> new CustomExperienceBottle(1024));
+        iconItem = ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X4K".toLowerCase(), () -> new CustomExperienceBottle(4096));
+        ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X16K".toLowerCase(), () -> new CustomExperienceBottle(16384));
+        ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X64K".toLowerCase(), () -> new CustomExperienceBottle(65536));
         return ITEMS_REGISTER;
     }
 
     public static DeferredRegister<CreativeModeTab> getCreativeModeTabDeferredRegister() {
+        CREATIVE_MODE_TAB_DEFERRED_REGISTER.register(MODID, () -> CreativeModeTab.builder()
+                .title(Component.translatable("item_group." + MODID))
+                .icon(() -> new ItemStack(iconItem.asItem()))
+                .displayItems((params, output) -> ITEMS_REGISTER.getEntries().forEach(x -> output.accept(x.get())))
+                .build());
         return CREATIVE_MODE_TAB_DEFERRED_REGISTER;
     }
 
