@@ -10,7 +10,7 @@ license="All Rights Reserved unless otherwise explicitly stated."
 
 [[mods]] #mandatory
 modId="compactxpbottles"
-version="2.1.1"
+version="2.1.2"
 displayName="Compact Experience Bottles" #mandatory
 
 # A URL to query for updates for this mod. See the JSON update specification https://docs.neoforged.net/docs/misc/updatechecker/

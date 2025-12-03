@@ -32,11 +32,14 @@ neoForge {
         client {
             client()
         }
-        data {
-            data()
+        clientData {
+            clientData()
         }
         server {
             server()
+        }
+        serverData {
+            serverData()
         }
     }
 

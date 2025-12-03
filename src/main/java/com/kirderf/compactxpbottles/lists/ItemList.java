@@ -19,14 +19,14 @@ public class ItemList {
     private static DeferredItem<CustomExperienceBottle> iconItem;
 
     public static DeferredRegister.Items getItemRegister() {
-        ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X4".toLowerCase(), () -> new CustomExperienceBottle(4));
-        ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X16".toLowerCase(), () -> new CustomExperienceBottle(16));
-        ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X64".toLowerCase(), () -> new CustomExperienceBottle(64));
-        ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X256".toLowerCase(), () -> new CustomExperienceBottle(256));
-        ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X1K".toLowerCase(), () -> new CustomExperienceBottle(1024));
-        iconItem = ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X4K".toLowerCase(), () -> new CustomExperienceBottle(4096));
-        ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X16K".toLowerCase(), () -> new CustomExperienceBottle(16384));
-        ITEMS_REGISTER.register("EXPERIENCE_BOTTLE_X64K".toLowerCase(), () -> new CustomExperienceBottle(65536));
+        ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X4".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 4));
+        ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X16".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 16));
+        ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X64".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 64));
+        ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X256".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 256));
+        ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X1K".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 1024));
+        iconItem = ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X4K".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 4096));
+        ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X16K".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 16384));
+        ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X64K".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 65536));
         return ITEMS_REGISTER;
     }
 
