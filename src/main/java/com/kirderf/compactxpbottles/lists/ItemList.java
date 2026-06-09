@@ -9,6 +9,10 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import static com.kirderf.compactxpbottles.CompactXpBottles.MODID;
 
 public class ItemList {
@@ -18,15 +22,32 @@ public class ItemList {
 
     private static DeferredItem<CustomExperienceBottle> iconItem;
 
+    public static final List<Map.Entry<String, Integer>> BOTTLES = List.of(
+            Map.entry("experience_bottle_x4",     4),
+            Map.entry("experience_bottle_x16",    16),
+            Map.entry("experience_bottle_x64",    64),
+            Map.entry("experience_bottle_x256",   256),
+            Map.entry("experience_bottle_x1k",    1024),
+            Map.entry("experience_bottle_x4k",    4096),
+            Map.entry("experience_bottle_x16k",   16384),
+            Map.entry("experience_bottle_x64k",   65536)
+    );
+
+    public static final Map<String, DeferredItem<CustomExperienceBottle>> BOTTLE_ITEMS = new LinkedHashMap<>();
+
+
     public static DeferredRegister.Items getItemRegister() {
-        ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X4".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 4));
-        ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X16".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 16));
-        ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X64".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 64));
-        ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X256".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 256));
-        ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X1K".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 1024));
-        iconItem = ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X4K".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 4096));
-        ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X16K".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 16384));
-        ITEMS_REGISTER.registerItem("EXPERIENCE_BOTTLE_X64K".toLowerCase(), (properties) -> new CustomExperienceBottle(properties, 65536));
+        for (var entry : BOTTLES) {
+            var item = ITEMS_REGISTER.registerItem(entry.getKey(),
+                    (properties) -> new CustomExperienceBottle(properties, entry.getValue()));
+
+            BOTTLE_ITEMS.put(entry.getKey(), item);
+
+            if (entry.getKey().equals("experience_bottle_x4k")) {
+                iconItem = item;
+            }
+        }
+
         return ITEMS_REGISTER;
     }
 
