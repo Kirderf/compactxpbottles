@@ -9,10 +9,10 @@ import static com.kirderf.compactxpbottles.CompactXpBottles.MODID;
 @EventBusSubscriber(modid = MODID)
 public class DataGenerators {
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
+    public static void gatherData(GatherDataEvent.Client event) {
         event.getGenerator().addProvider(
-                event.includeServer(),
-                new ModRecipeProvider(event.getGenerator().getPackOutput(), event.getLookupProvider())
+                true,
+                new ModRecipeProvider.Runner(event.getGenerator().getPackOutput(), event.getLookupProvider())
         );
     }
 }

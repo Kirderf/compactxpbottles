@@ -16,17 +16,17 @@ import java.util.concurrent.CompletableFuture;
 
 public class ModRecipeProvider extends RecipeProvider {
 
-    public ModRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider);
+    public ModRecipeProvider(HolderLookup.Provider lookupProvider, RecipeOutput output) {
+        super(lookupProvider, output);
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput output) {
+    protected void buildRecipes() {
         List<CustomExperienceBottle> bottles = ItemList.BOTTLES.stream()
                 .map(entry -> ItemList.BOTTLE_ITEMS.get(entry.getKey()).get())
                 .toList();
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, bottles.getFirst())
+        ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, bottles.getFirst())
                 .requires(Items.EXPERIENCE_BOTTLE, 4)
                 .unlockedBy("has_xp_bottle", has(Items.EXPERIENCE_BOTTLE))
                 .save(output);
@@ -35,10 +35,26 @@ public class ModRecipeProvider extends RecipeProvider {
             Item ingredient = bottles.get(i - 1);
             Item result = bottles.get(i);
 
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, result)
+            ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, result)
                     .requires(ingredient, 4)
                     .unlockedBy("has_" + ItemList.BOTTLES.get(i - 1).getKey(), has(ingredient))
                     .save(output);
+        }
+    }
+
+    public static class Runner extends RecipeProvider.Runner {
+        public Runner(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+            super(output, lookupProvider);
+        }
+
+        @Override
+        protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
+            return new ModRecipeProvider(provider, recipeOutput);
+        }
+
+        @Override
+        public String getName() {
+            return "Compact XP Bottles Recipes";
         }
     }
 }
