@@ -27,6 +27,7 @@ base {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${Forge_version}"
+    testImplementation "org.junit.jupiter:junit-jupiter:5.10.2"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -77,4 +78,8 @@ tasks.withType(ProcessResources).configureEach {
     filesMatching('META-INF/mods.toml') {
         expand replaceProperties
     }
+}
+
+test {
+    useJUnitPlatform()
 }

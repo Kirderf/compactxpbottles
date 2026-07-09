@@ -35,7 +35,7 @@ public class CustomThrownExperienceBottle extends ThrownExperienceBottle {
         if (var3 instanceof ServerLevel level) {
             level.levelEvent(2002, this.blockPosition(), PotionUtils.getColor(Potions.WATER));
             int xpCount = 3 + this.random.nextInt(5) + this.random.nextInt(5);
-            ExperienceOrb.award((ServerLevel)this.level(), this.position(), xpCount);
+            ExperienceOrb.award((ServerLevel) this.level(), this.position(), xpCount * xpMultiplier);
             this.discard();
         }
 

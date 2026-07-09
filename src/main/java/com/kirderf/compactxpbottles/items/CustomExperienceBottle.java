@@ -8,7 +8,6 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ThrownExperienceBottle;
 import net.minecraft.world.item.ExperienceBottleItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -33,10 +32,10 @@ public class CustomExperienceBottle extends ExperienceBottleItem {
         ItemStack itemStack = player.getItemInHand(hand);
         level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.EXPERIENCE_BOTTLE_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
         if (level instanceof ServerLevel serverLevel) {
-            ThrownExperienceBottle thrownexperiencebottle = new CustomThrownExperienceBottle(serverLevel, player, xpMultiplier);
-            thrownexperiencebottle.setItem(itemStack);
-            thrownexperiencebottle.shootFromRotation(player, player.getXRot(), player.getYRot(), -20.0F, 0.7F, 1.0F);
-            serverLevel.addFreshEntity(thrownexperiencebottle);
+            CustomThrownExperienceBottle customThrownExperienceBottle = new CustomThrownExperienceBottle(serverLevel, player, xpMultiplier);
+            customThrownExperienceBottle.setItem(itemStack);
+            customThrownExperienceBottle.shootFromRotation(player, player.getXRot(), player.getYRot(), -20.0F, 0.7F, 1.0F);
+            serverLevel.addFreshEntity(customThrownExperienceBottle);
         }
 
         player.awardStat(Stats.ITEM_USED.get(this));
@@ -44,6 +43,9 @@ public class CustomExperienceBottle extends ExperienceBottleItem {
             itemStack.shrink(1);
         }
         return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
+    }
+    public int getXpMultiplier() {
+        return xpMultiplier;
     }
 }
 

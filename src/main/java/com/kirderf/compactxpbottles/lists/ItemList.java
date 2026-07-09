@@ -45,7 +45,7 @@ public class ItemList {
                      () -> new CustomExperienceBottle(new Item.Properties(), entry.getValue()));
             BOTTLE_ITEMS.put(entry.getKey(), item);
 
-            if (entry.getKey().equals("experience_bottle_x4k")) {
+            if (iconItem == null) {
                 iconItem = item;
             }
         }
