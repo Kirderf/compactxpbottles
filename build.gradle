@@ -1,5 +1,6 @@
 plugins {
-    id 'net.neoforged.moddev' version '2.0.141'
+    id 'java'
+    id 'net.minecraftforge.gradle' version '5.1.+'
     id("io.github.themrmilchmann.curseforge-publish") version "0.8.0"
 }
 
@@ -17,37 +18,36 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
+    maven { url = 'https://maven.minecraftforge.net/' }
 }
 
 base {
     archivesName = mod_id
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${Forge_version}"
+}
 
-neoForge {
-    version = neoForge_version
-    validateAccessTransformers = true
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
     runs {
         client {
-            client()
-        }
-        data {
-            clientData()
-            programArguments.addAll '--mod', mod_id,
-                    '--all',
-                    '--output', file('src/generated/resources/').getAbsolutePath(),
-                    '--existing', file('src/main/resources/').getAbsolutePath()
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            args '--username', 'Dev'
         }
         server {
-            server()
-            programArgument '--nogui'
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
         }
-    }
-
-    mods {
-        compactxpbottles {
-            sourceSet sourceSets.main
+        data {
+            workingDirectory project.file('run')
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath()
         }
     }
 }
@@ -60,7 +60,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 curseforge {
     apiToken = providers.gradleProperty("cf_api_token")
     publications {
-        named("neoForge") {
+        register("curseForge") {
             projectId = "349327"
         }
     }
@@ -74,7 +74,7 @@ tasks.withType(ProcessResources).configureEach {
             mod_version: mod_version
     ]
     inputs.properties replaceProperties
-    filesMatching('META-INF/neoforge.mods.toml') {
+    filesMatching('META-INF/mods.toml') {
         expand replaceProperties
     }
 }

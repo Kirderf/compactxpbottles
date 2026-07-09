@@ -4,12 +4,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownExperienceBottle;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.projectile.ThrownExperienceBottle;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
 
 public class CustomThrownExperienceBottle extends ThrownExperienceBottle {
     private final int xpMultiplier;
@@ -19,13 +18,13 @@ public class CustomThrownExperienceBottle extends ThrownExperienceBottle {
         this.xpMultiplier = xpMultiplier;
     }
 
-    public CustomThrownExperienceBottle(Level level, LivingEntity shooter, ItemStack itemStack, int xpMultiplier) {
-        super(level, shooter, itemStack);
+    public CustomThrownExperienceBottle(Level level, LivingEntity shooter, int xpMultiplier) {
+        super(level, shooter);
         this.xpMultiplier = xpMultiplier;
     }
 
-    public CustomThrownExperienceBottle(Level level, double x, double y, double z, ItemStack itemStack, int xpMultiplier) {
-        super(level, x, y, z, itemStack);
+    public CustomThrownExperienceBottle(Level level, double x, double y, double z, int xpMultiplier) {
+        super(level, x, y, z);
         this.xpMultiplier = xpMultiplier;
     }
 
@@ -34,15 +33,9 @@ public class CustomThrownExperienceBottle extends ThrownExperienceBottle {
         super.onHit(hitResult);
         Level var3 = this.level();
         if (var3 instanceof ServerLevel level) {
-            level.levelEvent(2002, this.blockPosition(), -13083194);
+            level.levelEvent(2002, this.blockPosition(), PotionUtils.getColor(Potions.WATER));
             int xpCount = 3 + this.random.nextInt(5) + this.random.nextInt(5);
-            if (hitResult instanceof BlockHitResult blockHitResult) {
-                Vec3 blockNormalHit = blockHitResult.getDirection().getUnitVec3();
-                ExperienceOrb.awardWithDirection(level, hitResult.getLocation(), blockNormalHit, xpCount * xpMultiplier);
-            } else {
-                ExperienceOrb.awardWithDirection(level, hitResult.getLocation(), this.getDeltaMovement().scale((double) -1.0F), xpCount * xpMultiplier);
-            }
-
+            ExperienceOrb.award((ServerLevel)this.level(), this.position(), xpCount);
             this.discard();
         }
 
